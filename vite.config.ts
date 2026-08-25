@@ -12,4 +12,9 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  // Hostinger Web Apps runs a Node process. Lovable production builds still
+  // force Cloudflare; this preset applies only outside Lovable.
+  nitro: {
+    preset: "node-server",
+  },
 });
