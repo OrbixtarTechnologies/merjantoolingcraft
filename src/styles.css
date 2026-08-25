@@ -1,0 +1,354 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Axiom Manufacturing design system — industrial, high-contrast steel + safety orange.
+ * All colors in oklch. Never hardcode colors in components.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --font-display: "Figtree", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-steel: var(--steel);
+  --color-steel-foreground: var(--steel-foreground);
+  --color-surface-light: var(--surface-light);
+  --color-navy: var(--navy);
+  --color-navy-foreground: var(--navy-foreground);
+  --shadow-soft: var(--shadow-soft);
+  --shadow-lift: var(--shadow-lift);
+}
+
+:root {
+  --radius: 0.25rem;
+  /* Premium industrial dark theme: deep navy-black surfaces, steel gray, industrial orange. */
+  --background: oklch(0.17 0.018 258);
+  --foreground: oklch(0.96 0.005 255);
+  --card: oklch(0.21 0.022 258);
+  --card-foreground: oklch(0.96 0.005 255);
+  --popover: oklch(0.21 0.022 258);
+  --popover-foreground: oklch(0.96 0.005 255);
+  --primary: oklch(0.68 0.19 44);
+  --primary-foreground: oklch(0.16 0.02 45);
+  --secondary: oklch(0.26 0.022 258);
+  --secondary-foreground: oklch(0.95 0.005 255);
+  --muted: oklch(0.25 0.02 258);
+  --muted-foreground: oklch(0.72 0.015 256);
+  --accent: oklch(0.3 0.03 258);
+  --accent-foreground: oklch(0.97 0.004 255);
+  --destructive: oklch(0.58 0.22 27);
+  --destructive-foreground: oklch(0.99 0.003 260);
+  --border: oklch(0.3 0.02 258);
+  --input: oklch(0.34 0.02 258);
+  --ring: oklch(0.68 0.19 44);
+  --steel: oklch(0.24 0.02 258);
+  --steel-foreground: oklch(0.9 0.01 256);
+  --surface-light: oklch(0.97 0.005 255);
+  --navy: oklch(0.13 0.02 258);
+  --navy-foreground: oklch(0.96 0.005 255);
+  --shadow-soft: 0 1px 2px oklch(0 0 0 / 0.4), 0 12px 32px -12px oklch(0 0 0 / 0.55);
+  --shadow-lift: 0 2px 4px oklch(0 0 0 / 0.45), 0 24px 56px -20px oklch(0 0 0 / 0.7);
+}
+
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+}
+
+@utility label-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+@utility hatch {
+  background-image: repeating-linear-gradient(
+    135deg,
+    color-mix(in oklab, var(--color-primary) 22%, transparent) 0 2px,
+    transparent 2px 9px
+  );
+}
+
+@utility btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.6rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background-color: var(--color-primary);
+  color: var(--color-primary-foreground);
+  border-radius: var(--radius);
+  transition: background-color 0.18s ease, transform 0.18s ease;
+
+  &:hover {
+    background-color: color-mix(in oklab, var(--color-primary) 85%, white);
+    transform: translateY(-1px);
+  }
+}
+
+@utility btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.6rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border: 1px solid var(--color-border);
+  color: var(--color-foreground);
+  border-radius: var(--radius);
+  transition: border-color 0.18s ease, background-color 0.18s ease;
+
+  &:hover {
+    border-color: var(--color-primary);
+    background-color: var(--color-secondary);
+  }
+}
+
+@utility field {
+  width: 100%;
+  background-color: var(--color-steel);
+  border: 1px solid var(--color-input);
+  border-radius: var(--radius);
+  padding: 0.7rem 0.9rem;
+  font-size: 0.95rem;
+  color: var(--color-foreground);
+
+  &::placeholder {
+    color: var(--color-muted-foreground);
+  }
+
+  &:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: -1px;
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  h1 {
+    letter-spacing: -0.035em;
+  }
+}
+
+@utility surface-card {
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  border-radius: calc(var(--radius) * 2);
+  box-shadow: var(--shadow-soft);
+  transition: box-shadow 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+
+  &:hover {
+    box-shadow: var(--shadow-lift);
+    transform: translateY(-3px);
+    border-color: color-mix(in oklab, var(--color-primary) 40%, var(--color-border));
+  }
+}
+
+@utility panel-navy {
+  background-color: var(--color-navy);
+  color: var(--color-navy-foreground);
+}
+
+@utility text-gradient-navy {
+  background-image: linear-gradient(
+    120deg,
+    var(--color-navy),
+    color-mix(in oklab, var(--color-navy) 60%, var(--color-primary))
+  );
+  background-clip: text;
+  color: transparent;
+}
+
+@utility grid-blueprint {
+  background-image:
+    linear-gradient(color-mix(in oklab, var(--color-foreground) 8%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--color-foreground) 8%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ---------- Motion utilities ---------- */
+
+@keyframes mtc-ken-burns {
+  0% { transform: scale(1.06) translate3d(0, 0, 0); }
+  100% { transform: scale(1.16) translate3d(-1.2%, -1.4%, 0); }
+}
+
+@keyframes mtc-sheen {
+  0% { transform: translateX(-120%) skewX(-18deg); }
+  100% { transform: translateX(220%) skewX(-18deg); }
+}
+
+@keyframes mtc-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(2%, -3%, 0) scale(1.06); }
+}
+
+@keyframes mtc-rule {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes mtc-scroll-hint {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50% { transform: translateY(6px); opacity: 1; }
+}
+
+@utility ken-burns {
+  animation: mtc-ken-burns 22s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@utility drift-orb {
+  animation: mtc-drift 16s ease-in-out infinite;
+  will-change: transform;
+}
+
+@utility rule-accent {
+  display: block;
+  height: 2px;
+  width: 3.5rem;
+  background-color: var(--color-primary);
+  transform-origin: left center;
+  animation: mtc-rule 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@utility scroll-hint {
+  animation: mtc-scroll-hint 1.8s ease-in-out infinite;
+}
+
+/* Light sweep across a surface on hover */
+@utility sheen {
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in oklab, white 45%, transparent),
+      transparent
+    );
+    width: 45%;
+    transform: translateX(-120%) skewX(-18deg);
+    opacity: 0;
+  }
+
+  &:hover::after {
+    opacity: 1;
+    animation: mtc-sheen 0.9s ease-out;
+  }
+}
+
+/* Animated underline for inline links */
+@utility link-underline {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 1.5px;
+    width: 100%;
+    background-color: var(--color-primary);
+    transform: scaleX(0);
+    transform-origin: right center;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+}
+
+@utility hover-lift {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lift);
+  }
+}
